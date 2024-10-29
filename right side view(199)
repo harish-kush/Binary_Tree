@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int levels(TreeNode* root){
+    if(root==NULL) return 0;
+    int l = levels(root->left);
+    int r = levels(root->right);
+    return max(l,r)+1;
+    }
+    void preOrder(TreeNode* root, vector<int>& ans, int level){
+        if(!root) return;
+        ans[level] = root->val;
+        preOrder(root->left,ans, level+1);
+        preOrder(root->right,ans,level+1);
+    }
+   
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int>ans(levels(root),0);
+        preOrder(root,ans,0);
+        return ans;
+    }
+};
