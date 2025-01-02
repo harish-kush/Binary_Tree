@@ -1,0 +1,20 @@
+class Solution {
+public:
+   int helper(TreeNode* root, int& targetTilt){
+    if(!root) return 0;
+    int leftSum = helper(root->left,targetTilt);
+    int rightSum = helper(root->right,targetTilt);
+
+    int tilt = abs(leftSum-rightSum);
+
+    targetTilt+=tilt;
+
+    return root->val + leftSum+rightSum;
+
+   }
+    int findTilt(TreeNode* root) {
+        int target = 0;
+      helper(root,target);
+      return target;
+    }
+};
