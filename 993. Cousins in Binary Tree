@@ -1,0 +1,33 @@
+/*ek parent and height bhejo jisko ham change krenge
+initially guve parent and height = -1 and when then value found :-
+target parent = parent (that root->val)
+target height = height jo function call hone pr hui h
+*/
+class Solution {
+public:
+    void helper(TreeNode* root, int parent,int height, int target, int& tParent, int& tHeight){
+        if(!root) return ;
+
+        if(root->val==target){
+            tParent = parent;
+            tHeight = height;
+            return;
+        }
+
+        helper(root->left,root->val,height+1,target, tParent, tHeight);
+        helper(root->right,root->val,height+1,target, tParent, tHeight);
+    }
+    bool isCousins(TreeNode* root, int x, int y) {
+        int xParent = -1;
+        int yParent = -1;
+        int xHeight = -1;
+        int yHeight = -1;
+
+        helper(root,-1,-1,x,xParent,xHeight);
+        helper(root,-1,-1,y,yParent,yHeight);
+
+        if(xParent!=yParent && xHeight==yHeight) return true;
+
+        return false;
+    }
+};
