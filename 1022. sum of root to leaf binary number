@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int helper(TreeNode* root, int currSum){
+        if(!root) return 0;
+        
+        currSum = currSum * 2 + root->val;
+
+        if(!root->left && !root->right) return currSum;
+
+        return helper(root->left,currSum) + helper(root->right,currSum);
+    }
+    int sumRootToLeaf(TreeNode* root) {
+
+        int sum = helper(root,0);
+
+        return sum;
+    }
+};
