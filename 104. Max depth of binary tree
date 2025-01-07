@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> helper(TreeNode* root, vector<int> height, int depth){
+        if(!root->left && !root->right) {
+            height.push_back(depth);
+            return;
+        }
+
+        // left check 
+        helper(root->left,height,depth+1);
+        // right check
+        helper(root->right,height,depth+1);
+
+        return height;
+
+    }
+    int maxDepth(TreeNode* root) {
+        vector<int>height;
+        helper(root,height,0);
+        sort(height.begin(),height.end());
+
+        return height[height.size()-1];
+    }
+};
